@@ -86,15 +86,15 @@
   ;; ensure these are compared by char-wise eql
   (is-match "aaa" "aaa")
   (is-not-match "aaa" "AAA")
-  (is-match #S(POINT :x "A" :y "B")
-            #S(POINT :x "A" :y "B"))
-  (is-not-match #S(POINT :x "A" :y "B")
-                #S(POINT :x "a" :y "b"))
+  (is-match #S(point :x "A" :y "B")
+            #S(point :x "A" :y "B"))
+  (is-not-match #S(point :x "A" :y "B")
+                #S(point :x "a" :y "b"))
   ;; check if INCLUDEd slots are direct slots
-  (is-match #S(POINT3 :x "A" :y "B" :z "C")
-            #S(POINT3 :x "A" :y "B" :z "C"))
-  (is-not-match #S(POINT3 :x "A" :y "B" :z "C")
-                #S(POINT3 :x "a" :y "b" :z "c")))
+  (is-match #S(point3 :x "A" :y "B" :z "C")
+            #S(point3 :x "A" :y "B" :z "C"))
+  (is-not-match #S(point3 :x "A" :y "B" :z "C")
+                #S(point3 :x "a" :y "b" :z "c")))
 
 (test (variable-pattern :compile-at :run-time)
   ;; simple bind
@@ -623,7 +623,7 @@
        (next))))
 
   (let ((x `(match2 1 (1 (next)))))
-    (signals ERROR ;; not necessarily PROGRAM-ERROR
+    (signals error ;; not necessarily PROGRAM-ERROR
       ;; using `next' in the last clause of match2
       (eval x))))
 
@@ -950,12 +950,12 @@
   #+implementation-defined (is-match #p"/usr/src/" (equal #p"/USR/SRC/"))
   #+implementation-defined (is-match #p"/usr/src/" (equalp #p"/USR/SRC/"))
   
-  (is-match #S(POINT :x "A" :y "B") #S(POINT :x "A" :y "B"))
-  (is-not-match #S(POINT :x "A" :y "B") (eq #S(POINT :x "A" :y "B")))
-  (is-not-match #S(POINT :x "A" :y "B") (eql #S(POINT :x "A" :y "B")))
-  (is-not-match #S(POINT :x "A" :y "B") (equal #S(POINT :x "A" :y "B")))
-  (is-match #S(POINT :x "A" :y "B") (equalp #S(POINT :x "A" :y "B")))
-  (is-not-match #S(POINT :x "A" :y "B") #S(POINT :x "a" :y "b")))
+  (is-match #S(point :x "A" :y "B") #S(point :x "A" :y "B"))
+  (is-not-match #S(point :x "A" :y "B") (eq #S(point :x "A" :y "B")))
+  (is-not-match #S(point :x "A" :y "B") (eql #S(point :x "A" :y "B")))
+  (is-not-match #S(point :x "A" :y "B") (equal #S(point :x "A" :y "B")))
+  (is-match #S(point :x "A" :y "B") (equalp #S(point :x "A" :y "B")))
+  (is-not-match #S(point :x "A" :y "B") #S(point :x "a" :y "b")))
 
 (test (issue-86 :compile-at :run-time)
   (let ((a 0))
