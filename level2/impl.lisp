@@ -12,12 +12,12 @@
 (defun wildcardp (pattern)
   (and (symbolp pattern)
        (or (string= "_" (symbol-name pattern))
-           (string= "OTHERWISE" (symbol-name pattern)))))
+           (string= "otherwise" (symbol-name pattern)))))
 
 (defun variablep (pattern)
   (and (symbolp pattern)
        (string/= "_" (symbol-name pattern))
-       (string/= "OTHERWISE" (symbol-name pattern))))
+       (string/= "otherwise" (symbol-name pattern))))
 
 (defun pattern-expand-1 (p)
   "expand the given pattern once, just like macroexpand-1.
@@ -361,7 +361,7 @@ or results in a compilation error when this is the outermost matching construct.
 ;; the effect should last after the compilation/load
 (proclaim '(declaration optimizer))
 
-#-(or ecl)
+#-(or ecl allegro)
 (trivial-cltl2:define-declaration optimizer (specifier env)
   (declare (ignorable env))
   ;; (print specifier)
